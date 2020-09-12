@@ -1,21 +1,5 @@
 export const initialState = {
-  basket: [
-    {
-      id: "123",
-      title:
-        "Turtle Beach - Ear Force Recon 50P Stereo Gaming Headset - PS4 and Xbox One (compatible w/ Xbox One controller w/ ",
-      image: "https://m.media-amazon.com/images/I/81dh8R950eL._AC_UY218_.jpg",
-      price: 50.49,
-      rating: 3,
-    },
-    {
-      id: "5123",
-      title: "Minecraft - Nintendo Switch",
-      image: "https://m.media-amazon.com/images/I/71dIHv1zh7L._AC_UY218_.jpg",
-      price: 30.49,
-      rating: 3,
-    },
-  ],
+  basket: [],
   user : null,
 };
 
@@ -38,7 +22,7 @@ function reducer(state, action) {
       if (index >= 0) {
         newBasket.splice(index, 1);
       } else {
-        console.warn("Çant remove product (id: ${action.id}) ");
+        console.warn(`Çant remove product (id: ${action.id}) as it's not in the basket! `);
       }
 
       return {
@@ -46,7 +30,18 @@ function reducer(state, action) {
         basket: newBasket,
       };
       break;
-
+      case"SET_USER":
+      return {
+        ...state,
+        user: action.user,
+      };
+      break;
+      case"EMPTY_BASKET":
+      return {
+        ...state,
+        basket : []
+      };
+      break;
     default:
       return state;
   }

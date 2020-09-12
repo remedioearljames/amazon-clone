@@ -4,13 +4,13 @@ import CheckoutProduct from "./CheckoutProduct";
 import "./Checkout.css";
 import Subtotal from "./Subtotal"
 
+
 function Checkout() {
-  const [{ basket }] = useStateValue();
+  const [{ basket, user }] = useStateValue();
   console.log(basket.length);
   return (
     <div className="checkout">
-      <img className="checkout_ad" src="" alt="" />
-
+      <div className="checkout_left">
       {basket?.length === 0 ? (
         <div>
           <h2 className="checkout_header">Your Shopping basket is empty</h2>
@@ -22,7 +22,7 @@ function Checkout() {
         </div>
       ) : (
         <div>
-          <h2 className="checkout_header">Your Shopping basket</h2>
+          <h2 className="checkout_title">Your Shopping basket</h2>
           {basket.map((item) => (
             <CheckoutProduct
               id={item.id}
@@ -34,11 +34,11 @@ function Checkout() {
           ))}
         </div>
       )}
-      <div>
+      </div>
+
+      <div className="checkout_right">
         {basket?.length > 0 && (
-          <div className="checkout_right">
             <Subtotal/>
-          </div>
         )}
       </div>
     </div>
